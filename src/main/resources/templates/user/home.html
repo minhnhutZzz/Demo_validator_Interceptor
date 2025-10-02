@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Home</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/header}"></div>
+    <div class="container">
+        <h2>Welcome, User!</h2>
+        <p>This is the user home page. You can view videos here.</p>
+        <!-- Thêm danh sách video nếu cần -->
+        <div th:each="video : ${videos}">
+            <p th:text="${video.title}"></p>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer}"></div>
+</body>
+</html>

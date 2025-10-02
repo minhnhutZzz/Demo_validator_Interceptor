@@ -1,0 +1,87 @@
+.footer-gradient {
+    background: linear-gradient(135deg, #6b21a8, #db2777, #3b82f6) !important;
+    color: #ffffff;
+    padding: 3.5rem 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.footer-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: 0;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
+}
+
+.info-icon {
+    margin-right: 0.75rem;
+    color: #facc15 !important;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.info-item:hover .info-icon {
+    transform: scale(1.2);
+}
+
+.info-item {
+    background: rgba(255, 255, 255, 0.1) !important;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: translateX(5px);
+}
+
+.btn-update {
+    background: linear-gradient(45deg, #facc15, #f97316) !important;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    color: #1e1e1e;
+    transition: all 0.3s ease;
+}
+
+.btn-update:hover {
+    background: linear-gradient(45deg, #eab308, #ea580c) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.social-links a {
+    color: #ffffff !important;
+    font-size: 1.8rem;
+    margin: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #facc15 !important;
+    transform: scale(1.2) rotate(10deg);
+}
+
+.footer-divider {
+    border-top: 2px solid rgba(255, 255, 255, 0.3) !important;
+    margin: 2rem 0;
+}
+
+.footer-title {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}

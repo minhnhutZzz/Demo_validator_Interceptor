@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${category.isEdit ? 'Edit Category' : 'Add New Category'}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Sử dụng fragment content từ layout-admin.html -->
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    <h2 th:text="${category.isEdit ? 'Edit Category' : 'Add New Category'}"></h2>
+                </div>
+                <div class="card-body">
+                    <form action="#" th:action="@{/admin/categories/saveOrUpdate}" method="POST">
+                        <div class="mb-3">
+                            <label for="categoryId" class="form-label">Category ID:</label>
+                            <input type="hidden" th:value="${category.isEdit}" name="isEdit"/>
+                            <input type="text" readonly="readonly" class="form-control" th:value="${category.categoryId}" id="categoryId" name="categoryId" placeholder="Category Id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categoryname" class="form-label">Category Name:</label>
+                            <input type="text" class="form-control" th:value="${category.categoryname}" id="categoryname" name="categoryname" placeholder="Category Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="categorycode" class="form-label">Category Code:</label>
+                            <input type="text" class="form-control" th:value="${category.categorycode}" id="categorycode" name="categorycode" placeholder="Category Code">
+                        </div>
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status:</label>
+                            <select class="form-select" name="status" id="status">
+                                <option th:selected="${category.status == false}" value="false">Khóa</option>
+                                <option th:selected="${category.status == true}" value="true">Hoạt động</option>
+                            </select>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a href="#" th:href="@{/admin/categories/add}" class="btn btn-secondary">
+                                <i class="fas fa-new"></i> New
+                            </a>
+                            <a href="#" th:href="@{/admin/categories}" class="btn btn-success">
+                                <i class="fas fa-bars"></i> List Categories
+                            </a>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-save"></i> 
+                                <span th:text="${category.isEdit ? 'Update' : 'Save'}"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

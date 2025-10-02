@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Access Denied</h2>
+        <p>You do not have permission to access this page. Please <a th:href="@{/login}">login</a> with an admin account.</p>
+        <p th:text="${message}" style="color:red;"></p>
+    </div>
+</body>
+</html>
