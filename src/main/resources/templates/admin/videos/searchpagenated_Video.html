@@ -75,9 +75,9 @@
                                     <td th:text="${video.title}"></td>
                                     <td th:text="${video.description}"></td>
                                     <td>
-                                        <img th:src="${video.poster}" alt="Poster" style="width: 50px; height: 30px;" th:if="${video.poster != null}">
-                                        <span th:text="'No image'" th:if="${video.poster == null}"></span>
-                                    </td>
+                                    <img th:src="@{/images/} + ${video.poster}" alt="Poster" style="width: 50px; height: 30px;" th:if="${video.poster != null and not #strings.isEmpty(video.poster)}">
+                                    <span th:text="'No image'" th:if="${video.poster == null or #strings.isEmpty(video.poster)}" class="no-image"></span>
+                                </td>
                                     <td th:text="${video.views}"></td>
                                     <td th:text="${video.active ? 'Hoạt động' : 'Khóa'}"></td>
                                     <td>

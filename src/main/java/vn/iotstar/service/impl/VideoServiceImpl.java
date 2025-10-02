@@ -3,15 +3,18 @@ package vn.iotstar.service.impl;
 
 
 import java.util.List;
+
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import vn.iotstar.entity.Category;
+import vn.iotstar.entity.User;
 import vn.iotstar.entity.Video;
 import vn.iotstar.reponsitory.VideoRepository;
 import vn.iotstar.service.VideoService;
+
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -72,5 +75,12 @@ public class VideoServiceImpl implements VideoService {
     @Override
 	public Page<Video> findAll(Pageable pageable) {
         return videoRepository.findAll(pageable);  // Gọi findAll(Pageable) từ JpaRepository
+    }
+    
+ 
+   
+    @Override
+	public List<Video> findByUser(User user) {
+        return videoRepository.findByUser(user);  // Giả sử repository có phương thức này
     }
 }
