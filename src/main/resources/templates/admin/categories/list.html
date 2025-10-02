@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/layout-admin.html}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
-          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Hello, world!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    <title>List Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-...">
 </head>
 
@@ -19,7 +19,18 @@
     <section class="row" layout:fragment="content">
         <div class="col mt-4">
             <div class="card">
-                <div class="card-header">List Category</div>
+                <div class="card-header">
+                    List Category
+                    <!-- Thêm nút Add Category và Search Pagenated -->
+                    <div class="float-end">
+                        <a th:href="@{/admin/categories/add}" class="btn btn-success btn-sm me-2">
+                            <i class="fa fa-plus"></i> Add Category
+                        </a>
+                        <a th:href="@{/admin/categories/searchpagenated}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-search"></i> Search Pagenated
+                        </a>
+                    </div>
+                </div>
                 <div class="card-body">
                     <!-- Hiển thị thông báo -->
                     <div th:if="${message != null}">
@@ -42,13 +53,10 @@
                         <tbody>
                             <tr th:each="category : ${categories}">
                                 <td th:text="${category.categoryId}"></td>
-                                <td th:text="${category.categoryname}"></td>
-                                <td th:text="${category.categorycode}"></td>
+                                <td th:text="${category.categorycode}"></td> <!-- Sửa từ categoryname thành categorycode -->
+                                <td th:text="${category.categoryname}"></td> <!-- Sửa từ categorycode thành categoryname -->
                                 <td th:text="${category.status ? 'Hoạt động' : 'Khóa'}"></td>
                                 <td>
-                                    <a th:href="@{/admin/categories/view/{id}(id=${category.categoryId})}" class="btn btn-outline-info">
-                                        <i class="fa fa-info"></i>
-                                    </a>
                                     <a th:href="@{/admin/categories/edit/{id}(id=${category.categoryId})}" class="btn btn-outline-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
