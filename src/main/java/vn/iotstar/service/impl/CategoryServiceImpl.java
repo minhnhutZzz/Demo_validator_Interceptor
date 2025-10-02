@@ -13,6 +13,8 @@ import vn.iotstar.entity.Category;
 import vn.iotstar.reponsitory.CategoryRepository;
 import vn.iotstar.service.CategoryService;
 
+
+// lớp này triển khai Interface CategoryService gọi Repository xử lý nghiệp vụ trả về Controller
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	

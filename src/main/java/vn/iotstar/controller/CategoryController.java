@@ -1,6 +1,7 @@
 package vn.iotstar.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -28,8 +29,10 @@ import jakarta.validation.Valid;
 
 import vn.iotstar.entity.Category;
 import vn.iotstar.entity.User;
+import vn.iotstar.entity.Video;
 import vn.iotstar.model.CategoryModel;
 import vn.iotstar.service.CategoryService;
+import vn.iotstar.service.VideoService;
 
 @Controller
 @RequestMapping("admin/categories")
@@ -37,6 +40,11 @@ public class CategoryController {
 
     @Autowired
     CategoryService categoryService;
+    
+    @Autowired
+    VideoService videoService;
+    
+    
 
     @GetMapping("")
     public String list(ModelMap model) {
@@ -55,14 +63,15 @@ public class CategoryController {
 
     @PostMapping("saveOrUpdate")
     public ModelAndView saveOrUpdate(
-            ModelMap model,
-            @Valid @ModelAttribute("category") CategoryModel cate,
-            BindingResult result,
-            HttpSession session) {
+            ModelMap model,// đối tượng để thêm thuộc tính truyền sang view
+            @Valid @ModelAttribute("category") CategoryModel cate,// thêm thuộc tính từ form vào Model
+            BindingResult result,//Lưu kết quả validation và hiện lỗi
+            HttpSession session) {// lưu thông tin vào session 
         if (result.hasErrors()) {
             return new ModelAndView("admin/categories/addOrEdit");
         }
 
+        // copy dữ liệu từ Model và Entity
         Category entity = new Category();
         BeanUtils.copyProperties(cate, entity);
 
@@ -75,6 +84,7 @@ public class CategoryController {
             return new ModelAndView("redirect:/admin/categories");
         }
 
+        //lưu entity vào database 	
         categoryService.save(entity);
         String message = cate.isEdit() ? "Category đã được cập nhật" : "Category đã được thêm thành công";
         model.addAttribute("message", message);
@@ -147,5 +157,19 @@ public class CategoryController {
         }
         model.addAttribute("categoryPage", resultPage);
         return "admin/categories/searchpagenated";
+    }
+    
+    @GetMapping("/{categoryId}/videos")
+    public String viewVideos(@PathVariable("categoryId") Long categoryId, ModelMap model) {
+        Optional<Category> optCategory = categoryService.findById(categoryId);
+        if (optCategory.isPresent()) {
+            Category category = optCategory.get();
+            List<Video> videos = videoService.findByCategory(category);  // Giả sử VideoService có phương thức này
+            model.addAttribute("category", category);
+            model.addAttribute("videos", videos);
+            return "admin/videos/list_Video"; 
+        }
+        model.addAttribute("message", "Category không tồn tại");
+        return "redirect:/admin/categories";
     }
 }

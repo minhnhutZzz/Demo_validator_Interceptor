@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout-admin.html}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${video.isEdit ? 'Edit Video' : 'Add New Video'}"></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <!-- Sử dụng fragment content từ layout-admin.html -->
+    <section class="row" layout:fragment="content">
+        <div class="col-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    <h2 th:text="${video.isEdit ? 'Edit Video' : 'Add New Video'}"></h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/admin/videos/saveOrUpdate}" method="POST" th:object="${video}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{isEdit}" />
+                        
+                        <div class="mb-3">
+                            <label for="videoId" class="form-label">Video ID:</label>
+                            <input type="text" class="form-control" th:field="*{videoId}" id="videoId" placeholder="Video Id" readonly="readonly">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title:</label>
+                            <input type="text" class="form-control" th:field="*{title}" id="title" placeholder="Video Title">
+                            <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description:</label>
+                            <textarea class="form-control" rows="3" th:field="*{description}" id="description" placeholder="Video Description"></textarea>
+                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="imageFile" class="form-label">Poster Image:</label>
+                            <input type="file" class="form-control" th:field="*{imageFile}" id="imageFile">
+                            <span th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}" class="text-danger"></span>
+                            <input type="hidden" th:field="*{poster}" />
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="views" class="form-label">Views:</label>
+                            <input type="number" class="form-control" th:field="*{views}" id="views" placeholder="Number of Views">
+                            <span th:if="${#fields.hasErrors('views')}" th:errors="*{views}" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="active" class="form-label">Active:</label>
+                            <select class="form-select" th:field="*{active}" id="active">
+                                <option value="false">Khóa</option>
+                                <option value="true">Hoạt động</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="categoryId" class="form-label">Category:</label>
+                            <select class="form-select" th:field="*{categoryId}" id="categoryId">
+                                <option value="">Chọn Category</option>
+                                <option th:each="cat : ${categories}" th:value="${cat.categoryId}" th:text="${cat.categoryname}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('categoryId')}" th:errors="*{categoryId}" class="text-danger"></span>
+                        </div>
+                        
+                        <div class="card-footer text-muted">
+                            <a th:href="@{/admin/videos/add}" class="btn btn-secondary">
+                                <i class="fas fa-new"></i> New
+                            </a>
+                            <a th:href="@{/admin/videos}" class="btn btn-success">
+                                <i class="fas fa-bars"></i> List Videos
+                            </a>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-save"></i>
+                                <span th:text="${video.isEdit ? 'Update' : 'Save'}"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

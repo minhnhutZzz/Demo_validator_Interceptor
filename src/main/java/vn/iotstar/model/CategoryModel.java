@@ -2,9 +2,11 @@ package vn.iotstar.model;
 
 
 import jakarta.validation.constraints.NotBlank;
+
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+// lớp này giúp tách biệt giữa Entity và Controller để bảo mật dữ liệu
 @Data
 public class CategoryModel {
     private Long categoryId;
@@ -18,6 +20,6 @@ public class CategoryModel {
 
     private String images;
     private boolean status;
-    private boolean isEdit; // Cờ để kiểm tra thêm hay sửa
-    private Long userId;   // Thêm để liên kết với User (admin)
+    private boolean isEdit; 
+    private Long userId;   
 }

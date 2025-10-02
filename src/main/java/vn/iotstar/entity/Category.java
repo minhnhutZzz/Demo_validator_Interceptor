@@ -2,6 +2,7 @@ package vn.iotstar.entity;
 
 
 import java.io.Serializable;
+
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -44,7 +45,7 @@ public class Category implements Serializable {
     @Column(name = "Status")
     private boolean status;
     
-    // Mối quan hệ One-to-Many với Video (không đổi)
+    // Mối quan hệ One-to-Many với Video 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     private Set<Video> videos;
 

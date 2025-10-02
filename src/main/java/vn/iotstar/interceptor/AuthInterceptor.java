@@ -2,10 +2,13 @@ package vn.iotstar.interceptor;
 
 
 import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import vn.iotstar.entity.User;
 
+
+// chặn yêu cầu không hợp lệ ở giai đoạn sớm 
 public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

@@ -1,6 +1,7 @@
 package vn.iotstar.reponsitory;
 
 import java.util.List;
+	
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import vn.iotstar.entity.Category;
 
+
+// chứa các phương thức chuẩn trong JpaRepository thêm sửa xóa .. . . .
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 	List<Category> findByCategorynameContaining(String name);
